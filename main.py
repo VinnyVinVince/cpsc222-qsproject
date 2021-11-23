@@ -37,7 +37,7 @@ def graph_length(file):
         plt.bar([i], [length])
         i += 1
     plt.xlim(0, len(df) + 1)
-    plt.ylim(0, df["Message Length"].max())
+    plt.ylim(0, 200)
     plt.show()
 
 
@@ -49,11 +49,11 @@ def graph_punct(file):
         plt.bar([i], [length])
         i += 1
     plt.xlim(0, len(df) + 1)
-    plt.ylim(0, df["Punctuation Count"].max())
+    plt.ylim(0, 100)
     plt.show()
 
 
 f_name = "messages"
 clean_data(f_name)
 graph_length(f_name)
-graph_punct(f_name)
+#graph_punct(f_name)
