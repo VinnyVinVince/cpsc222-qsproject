@@ -4,11 +4,12 @@ Current Attributes:
     2. Timestamp
     3. Message Length
     4. Punctuation Count
+    5. Has Attachments
 '''
 import pandas as pd
 import numpy as np
-import scipy.stats as stats
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 
 
 def clean_data(file):
@@ -25,6 +26,18 @@ def clean_data(file):
         punct.append(count)
     channel_df["Message Length"] = length
     channel_df["Punctuation Count"] = punct
+
+    attach_ser = channel_df["Attachments"]
+    attach_ser.fillna("0", inplace=True)
+    attachments = []
+
+    for entry in attach_ser:
+        if entry == "0":
+            attachments.append("No")
+        else:
+            attachments.append("Yes")
+    channel_df["Has Attachments"] = attachments
+
     channel_df.drop(columns=["Contents", "Attachments"], inplace=True)
     channel_df.to_csv(file + "_cleaned.csv")
 
@@ -53,9 +66,9 @@ def graph_punct(file):
     plt.show()
 
 
-'''
 f_name = "messages"
 clean_data(f_name)
+'''
 graph_length(f_name)
 graph_punct(f_name)
 '''
@@ -70,6 +83,7 @@ t-critical: 1.645
 If t < 1.645, reject null
 If t >= 1.645, don't reject null
 '''
+'''
 kev_df = pd.read_csv("messages_cleaned.csv", index_col="ID")
 vin_df = pd.read_csv("c242291093847146507_cleaned.csv", index_col="ID")
 df = len(kev_df) + len(vin_df) - 2
@@ -78,7 +92,7 @@ print("Degrees of freedom:", df)
 t, p = stats.ttest_ind(kev_df["Message Length"], vin_df["Message Length"])
 print("t-value:", t)
 print("p-value:", p / 2)
-
+'''
 '''
 t = 1.21 < 1.645, reject null
 p = 0.11 > 0.05, don't reject null
