@@ -71,7 +71,7 @@ If t < 1.645, reject null
 If t >= 1.645, don't reject null
 '''
 kev_df = pd.read_csv("messages_cleaned.csv", index_col="ID")
-vin_df = pd.read_csv("c298044618145136640_cleaned.csv", index_col="ID")
+vin_df = pd.read_csv("c242291093847146507_cleaned.csv", index_col="ID")
 df = len(kev_df) + len(vin_df) - 2
 print("Degrees of freedom:", df)
 
