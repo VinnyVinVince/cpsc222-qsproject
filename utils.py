@@ -1,14 +1,21 @@
 import pandas as pd
 import numpy as np
 
+# this method will help take the relevant data from the discord csv file
+# We take the following attributes
+#       1. ID
+#       2. Timestamp
+#       3. Message Length
+#       4. Punctuation Count
+#       5. Has Attachment
 def clean_data(channel_df, file):
-    length = []                     # list to keep all the len of all messages
-    punct = []                      # list to keep all punct of all messages
+    length = []                                                         # list to keep all the len of all messages
+    punct = []                                                          # list to keep all punct of all messages
 
     for message in channel_df["Contents"]:
-        msg = str(message)          # current content in message
-        length.append(len(msg))     # length of the message
-        count = 0                   # will hold punctuation count
+        msg = str(message)                                              # current content in message
+        length.append(len(msg))                                         # length of the message
+        count = 0                                                       # will hold punctuation count
         if "." in msg or "!" in msg or "?" in msg:
             count += msg.count(".") + msg.count("!") + msg.count("?")
         punct.append(count)
@@ -31,6 +38,9 @@ def clean_data(channel_df, file):
 
     channel_df.to_csv(file + "_cleaned.csv")                            # save the dataset to a file
 
+# this method will help split the data:
+# 1. by year
+# 2. then by month for each year from 2016 to 2022 (not inclusive)
 def split_data(channel_df, name):
     # aggregating the data by year
     years = list(range(2016, 2022))
