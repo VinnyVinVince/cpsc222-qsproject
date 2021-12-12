@@ -73,7 +73,7 @@ def split_data(channel_df, name):
     # aggregate the data by month of the years
     months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     month_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    data_columns = ["Month", "Message Count", "Punctuation Count", "Attachment Count"]
+    data_columns = ["Month", "Message Length", "Punctuation Count", "Attachment Count"]
     list_data_months = []
 
     # aggregating by the month for each year
@@ -99,7 +99,7 @@ def split_data(channel_df, name):
                 # increment message index
                 current_message_index += 1
                 
-            month_total_data = {'Month': month_name[current_month], 'Message Count': sum(total_message_len), 'Punctuation Count': sum(total_punct_len), 'Attachment Count': sum(total_attach_len), 'Data Owner': name}
+            month_total_data = {'Month': month_name[current_month], 'Message Length': sum(total_message_len), 'Punctuation Count': sum(total_punct_len), 'Attachment Count': sum(total_attach_len), 'Data Owner': name}
             current_month += 1
             current_year_df = current_year_df.append(month_total_data, ignore_index=True)
         list_data_months.append(current_year_df)
