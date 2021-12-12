@@ -33,9 +33,9 @@ def clean_data(file):
 
     for entry in attach_ser:
         if entry == "0":
-            attachments.append("No")
+            attachments.append(0)
         else:
-            attachments.append("Yes")
+            attachments.append(1)
     channel_df["Has Attachments"] = attachments
 
     channel_df.drop(columns=["Contents", "Attachments"], inplace=True)
@@ -85,7 +85,7 @@ If t >= 1.645, don't reject null
 '''
 '''
 kev_df = pd.read_csv("messages_cleaned.csv", index_col="ID")
-vin_df = pd.read_csv("c242291093847146507_cleaned.csv", index_col="ID")
+vin_df = pd.read_csv("vin_data_cleaned.csv", index_col="ID")
 df = len(kev_df) + len(vin_df) - 2
 print("Degrees of freedom:", df)
 
