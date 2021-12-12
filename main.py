@@ -33,9 +33,9 @@ def clean_data(file):
 
     for entry in attach_ser:
         if entry == "0":
-            attachments.append("No")
+            attachments.append(0)
         else:
-            attachments.append("Yes")
+            attachments.append(1)
     channel_df["Has Attachments"] = attachments
 
     channel_df.drop(columns=["Contents", "Attachments"], inplace=True)
